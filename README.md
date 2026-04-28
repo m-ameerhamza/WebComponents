@@ -87,11 +87,14 @@ Designed for developers who want clean, efficient, and scalable components.
 <pre>
 WebComponents/
 │
-├── buttons/
-├── headers/
-├── auth-pages/
-├── scripts/
-└── assets/
+├── FOLDER
+├── FOLDER
+├── FOLDER
+├── FOLDER
+└── .
+└── .
+└── .
+└── .
 </pre>
 
 <hr>
