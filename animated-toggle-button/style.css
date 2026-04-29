@@ -1,0 +1,59 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f8f9fa;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.demo-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 280px;
+  height: 72px;
+  background-color: #1e2028; /* Dark grey background */
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  box-sizing: border-box;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.icon-container {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  height: 60px;
+  width: 80px; /* Initial width of the green box */
+  background-color: #ccff00; /* Neon green */
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Smooth animation for the sliding effect */
+  transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 2;
+}
+
+.text-container {
+  width: 100%;
+  text-align: center;
+  padding-left: 70px; /* Offsets the text so it looks centered in the remaining space */
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 600;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.demo-btn:hover .icon-container {
+  width: calc(100% - 12px); 
+}
+
+.demo-btn:hover .text-container {
+  opacity: 0; 
+}
