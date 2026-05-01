@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #ddd6f3;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .phone {
+    width: 320px;
+    background: #ede9f8;
+    border-radius: 40px;
+    padding: 10px 0 20px;
+    box-shadow: 0 20px 50px rgba(100,70,180,0.18);
+    overflow: hidden;
+  }
+
+  /* Status bar */
+  .status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    margin-bottom: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+  .status-icons { display: flex; gap: 5px; align-items: center; }
+  .status-icons svg { width: 14px; height: 14px; fill: #1a1a2e; }
+
+  /* Illustration area */
+  .illustration {
+    position: relative;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+  }
+
+  /* SVG Illustration */
+  .illus-svg {
+    width: 150px;
+    height: 105px;
+    position: relative;
+    bottom: 13px;
+  }
+
+  /* Floating icons */
+  .float-icon {
+    position: absolute;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    animation: float 3s ease-in-out infinite;
+  }
+  .float-icon.heart { top: 12px; right: 44px; background: #fff; width: 32px; height: 32px; 
+    box-shadow: 0 3px 10px rgba(120,80,200,0.2); animation-delay: 0.5s; }
+  .float-icon.bag  { top: 22px; right: 12px; background: #fff; width: 32px; height: 32px; 
+    box-shadow: 0 3px 10px rgba(120,80,200,0.2); }
+  .float-icon.chat { top: 16px; left: 22px; background: #7c5cbf; width: 32px; 
+    height: 32px; box-shadow: 0 3px 10px rgba(120,80,200,0.25); animation-delay: 1s; }
+  .float-icon.gear { bottom: 22px; left: 38px; background: #fff; width: 26px; 
+    height: 26px; border-radius: 50%; box-shadow: 0 3px 10px rgba(120,80,200,0.2); 
+    animation-delay: 0.3s; }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* Sparkles */
+  .sparkle {
+    position: absolute;
+    color: #f5c842;
+    font-size: 14px;
+    animation: sparkle 2.5s ease-in-out infinite;
+  }
+  .sparkle:nth-child(1) { top: 18px; left: 56px; animation-delay: 0s; }
+  .sparkle:nth-child(2) { top: 8px; right: 64px; animation-delay: 0.8s; font-size: 10px; }
+  .sparkle:nth-child(3) { bottom: 28px; right: 48px; animation-delay: 1.4s; font-size: 12px; }
+  @keyframes sparkle {
+    0%,100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    50% { opacity: 0.5; transform: scale(0.7) rotate(20deg); }
+  }
+
+  /* Card */
+  .card {
+    background: #fff;
+    margin: 0 12px;
+    border-radius: 24px;
+    padding: 22px 20px 20px;
+  }
+
+  .card h1 {
+    font-size: 18px;
+    font-weight: 800;
+    color: #1a1a2e;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .card p {
+    font-size: 11px;
+    color: #999;
+    text-align: center;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  /* Form */
+  .field { margin-bottom: 12px; }
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 5px;
+  }
+  .input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  input {
+    width: 100%;
+    border: 1.5px solid #ede9f8;
+    border-radius: 10px;
+    padding: 10px 13px;
+    font-size: 12px;
+    font-family: 'Nunito', sans-serif;
+    color: #1a1a2e;
+    background: #faf9ff;
+    outline: none;
+    transition: border-color 0.2s;
+    font-weight: 500;
+  }
+  input::placeholder { color: #bbb; font-weight: 500; }
+  input:focus { border-color: #7c5cbf; background: #fff; }
+  .eye-btn {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;cursor: pointer;padding: 0;color: #bbb;display: flex;align-items: center;
+  }
+  .eye-btn svg { width: 16px; height: 16px; }
+
+  /* Sign Up button */
+  .btn-signup {
+    width: 100%;
+    background: #6c48c5;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 13px;
+    font-size: 14px;
+    font-weight: 800;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    margin-top: 5px;
+    letter-spacing: 0.3px;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-signup:hover { background: #5a3aab; }
+  .btn-signup:active { transform: scale(0.98); }
+
+  /* Divider */
+  .divider {
+    text-align: center;
+    color: #bbb;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 12px 0;
+  }
+
+  /* Social buttons */
+  .btn-social {
+    width: 100%;
+    background: #fff;
+    border: 1.5px solid #ede9f8;
+    border-radius: 12px;
+    padding: 10px 13px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    color: #1a1a2e;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-social:hover { border-color: #c0aeeb; background: #faf9ff; }
+  .btn-social svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  /* Footer */
+  .footer-text {
+    text-align: center;
+    font-size: 11px;
+    color: #999;
+    font-weight: 500;
+    margin-top: 12px;
+  }
+  .footer-text a { color: #6c48c5; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <!-- Status Bar -->
+  <div class="status">
+    <span>9:41</span>
+    <div class="status-icons">
+      <svg viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+    </div>
+  </div>
+
+  <!-- Illustration -->
+  <div class="illustration">
+    <span class="sparkle">✦</span>
+    <span class="sparkle">✦</span>
+    <span class="sparkle">✦</span>
+
+    <!-- Girl SVG -->
+    <svg class="illus-svg" viewBox="0 0 260 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Leaves background -->
+      <ellipse cx="130" cy="170" rx="90" ry="20" fill="#c4b0e8" opacity="0.3"/>
+      <!-- Left leaf -->
+      <ellipse cx="52" cy="150" rx="28" ry="12" fill="#a68fd4" opacity="0.5" transform="rotate(-30 52 150)"/>
+      <ellipse cx="38" cy="138" rx="20" ry="8" fill="#b99fe0" opacity="0.4" transform="rotate(-45 38 138)"/>
+      <!-- Right leaf -->
+      <ellipse cx="210" cy="148" rx="28" ry="12" fill="#a68fd4" opacity="0.5" transform="rotate(30 210 148)"/>
+      <ellipse cx="224" cy="136" rx="20" ry="8" fill="#b99fe0" opacity="0.4" transform="rotate(45 224 136)"/>
+
+      <!-- Body -->
+      <rect x="96" y="110" width="68" height="70" rx="20" fill="#7c5cbf"/>
+      <!-- Shirt -->
+      <path d="M96 130 Q130 120 164 130 L164 165 Q130 170 96 165 Z" fill="#6c48c5"/>
+
+      <!-- Neck -->
+      <rect x="122" y="100" width="16" height="14" rx="6" fill="#f5c9a0"/>
+
+      <!-- Head -->
+      <ellipse cx="130" cy="92" rx="28" ry="26" fill="#f5c9a0"/>
+
+      <!-- Hair -->
+      <path d="M104 86 Q106 62 130 60 Q154 58 158 80 Q160 90 156 100 Q150 88 144 84 Q130 78 116 84 Q110 88 104 100 Z" fill="#3d2c6b"/>
+      <!-- Side hair left -->
+      <path d="M104 90 Q98 105 100 118 Q104 124 108 118 Q106 110 108 100 Z" fill="#3d2c6b"/>
+      <!-- Side hair right -->
+      <path d="M156 90 Q162 105 160 118 Q156 124 152 118 Q154 110 152 100 Z" fill="#3d2c6b"/>
+
+      <!-- Eyes -->
+      <ellipse cx="120" cy="92" rx="4" ry="4.5" fill="#fff"/>
+      <ellipse cx="140" cy="92" rx="4" ry="4.5" fill="#fff"/>
+      <ellipse cx="120" cy="93" rx="2.5" ry="3" fill="#3d2c6b"/>
+      <ellipse cx="140" cy="93" rx="2.5" ry="3" fill="#3d2c6b"/>
+      <!-- Eye shine -->
+      <circle cx="121" cy="91" r="1" fill="#fff"/>
+      <circle cx="141" cy="91" r="1" fill="#fff"/>
+
+      <!-- Blush -->
+      <ellipse cx="112" cy="99" rx="5" ry="3" fill="#f0a0a0" opacity="0.5"/>
+      <ellipse cx="148" cy="99" rx="5" ry="3" fill="#f0a0a0" opacity="0.5"/>
+
+      <!-- Smile -->
+      <path d="M122 102 Q130 108 138 102" stroke="#d4836a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+      <!-- Left arm -->
+      <path d="M96 128 Q78 135 74 148 Q78 158 88 152 Q92 140 100 134 Z" fill="#7c5cbf"/>
+      <ellipse cx="73" cy="152" rx="9" ry="8" fill="#f5c9a0"/>
+
+      <!-- Right arm holding phone -->
+      <path d="M164 128 Q180 130 184 145 Q186 158 176 156 Q170 144 162 136 Z" fill="#7c5cbf"/>
+      <!-- Phone in hand -->
+      <rect x="172" y="136" width="22" height="34" rx="4" fill="#fff" stroke="#ddd" stroke-width="1"/>
+      <rect x="175" y="140" width="16" height="22" rx="2" fill="#c4b0e8"/>
+      <rect x="179" y="165" width="8" height="2" rx="1" fill="#ddd"/>
+      <!-- Phone screen lines -->
+      <rect x="177" y="143" width="12" height="1.5" rx="0.75" fill="#9b79d4"/>
+      <rect x="177" y="147" width="10" height="1.5" rx="0.75" fill="#9b79d4"/>
+      <rect x="177" y="151" width="12" height="1.5" rx="0.75" fill="#9b79d4"/>
+    </svg>
+  </div>
+
+  <!-- White Card -->
+  <div class="card">
+    <h1>Create Account</h1>
+    <p>Join us and start your journey</p>
+
+    <div class="field">
+      <label>Full Name</label>
+      <input type="text" placeholder="Full Name">
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" placeholder="Email">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <div class="input-wrap">
+        <input type="password" placeholder="Password" id="pw1" style="padding-right:44px">
+        <button class="eye-btn" onclick="toggle('pw1',this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Confirm Password</label>
+      <div class="input-wrap">
+        <input type="password" placeholder="Confirm Password" id="pw2" style="padding-right:44px">
+        <button class="eye-btn" onclick="toggle('pw2',this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <button class="btn-signup">Sign Up</button>
+
+    <div class="divider">Or</div>
+
+    <button class="btn-social">
+      <!-- Google G -->
+      <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      Continue with Google
+    </button>
+    <button class="btn-social">
+      <!-- Apple -->
+      <svg viewBox="0 0 24 24" fill="#000"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Continue with Apple
+    </button>
+
+    <p class="footer-text">Already have an account? <a href="#">Log In</a></p>
+  </div>
+</div>
+
+<script>
+function toggle(id, btn) {
+  const inp = document.getElementById(id);
+  const show = inp.type === 'password';
+  inp.type = show ? 'text' : 'password';
+  btn.innerHTML = show
+    ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`
+    : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
+}
+</script>
+</body>
+</html>
